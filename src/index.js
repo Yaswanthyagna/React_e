@@ -1,17 +1,58 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react"
+import ReactDom from "react-dom"
+import Search from "./Search"
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import "./index.css"
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const second =[
+    {
+        url:"https://images-eu.ssl-images-amazon.com/images/I/81tEgsxpNZS._AC_UL200_SR200,200_.jpg",
+        name:"yaswanth"
+    },
+    {
+        url:"https://images-eu.ssl-images-amazon.com/images/I/818e%2Bfq7%2BBL._AC_UL200_SR200,200_.jpg",
+        name:"Abhinai"
+    },
+]
+
+
+function Greeting(){
+    return(
+        <div className="Book-List">
+            <Search />
+            <br/>
+            <br/>
+            {second.map((book) =>{
+                return <Book book={book}/>
+            })}            
+        </div>
+    )
+}
+
+
+const Book = (props) =>{
+    const {url,name} = props.book
+    return(
+        <section className="Book">
+           <Img url={url}/>
+           <Author name={name}/>
+        </section>
+    )
+}
+
+
+const Img = (props) =>{
+    return(
+        <img src={props.url} alt=""/>
+        )
+}
+
+const Author = (props) =>{
+    return(
+        <h1>
+            The Author is {props.name}
+        </h1>
+    )
+}
+
+ReactDom.render(<Greeting/>,document.getElementById('root'))
